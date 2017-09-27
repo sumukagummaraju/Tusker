@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Tusker Cabinets</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	{% load static %}
+	<script type="text/javascript" src="{% static 'bill/main.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'bill/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bill/print.css' %}" media="print" />
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet">
+	<style type="text/css">
+	*{
+		color: white;
+	}
+	table, th{
+    border: 1px solid white;
+	}	
+	</style>
+</head>
+<body id="inback">
+<img src="static/bill/tusk.png" width="300" height="70" class="logox">
+<div id="listx">
+	<div id="cat1"><div id="boxxy">Base Cabinets</div>
+		<ul id="mcat1">
+			<li id="bprod1">BC H=360 and D=560</li>
+			<li id="bprod2">BC H=720 and D=560</li>
+			<li id="bprod3">BC Sink/Hob H=720 and D=560</li>
+			<li id="bprod4">BC Special with Bottle/Towel Pull</li>
+			<li id="bprod5">End/Bridge Plates for BC</li>
+		</ul>
+	</div>
+	<div id="cat2"><div id="boxxy">Floating Base Cabinets</div>
+		<ul id="mcat2">
+			<li id="bprod6">FBC with Wall Hanging Brackets H=620 and D=520</li>
+			<li id="bprod7">FB(S/H)C with Wall Mounting Brackets H=620</li>
+			<li id="bprod8">FC Bridge or Bridge Plates with System Holes</li>
+			<li id="bprod9">FC Bridge or End Plates</li>
+		</ul>
+</div>
+
+
+<div id="cat3"><div id="boxxy">Tall/Semitall Cabinets</div>
+		<ul id="mcat3">
+			<li id="bprod10">BC STC with H=1320 and D=560 (only against order)</li>
+			<li id="bprod11">Bridge LS and RS for BC STC with H=1320 and D=560</li>
+			<li id="bprod12">Medium Tall with Outer Plates H=1320</li>
+			<li id="bprod13">TC H=2040 and D=560 (only against order)</li>
+		</ul>
+</div>
+
+
+<div id="cat4"><div id="boxxy">Corner Cabinets</div>
+		<ul id="mcat4">
+			<li id="bprod14">CC without bottom H=720</li>
+			<li id="bprod15">CC without bottom SemiTall H=1320</li>
+		</ul>
+</div>
+
+<div id="cat5"><div id="boxxy">Wall Cabinets</div>
+		<ul id="mcat5">
+			<li id="bprod16">WC D=330 - Hinge Provision at H=360</li>
+			<li id="bprod17">Wall HK Cabs D=330 H=360 (For aventos HK or for Hinges also)</li>
+			<li id="bprod18">WC for Hinge Provision D=330 H=600</li>
+			<li id="bprod19">Wall HK Cabs D=330 H=600 (For aventos HK or for Hinges also)</li>
+			<li id="bprod20">WC with Hinges Provision only D=330 H=720</li>
+			<li id="bprod21">WC with HF Provision H=720 D=330</li>
+			<li id="bprod22">WC with HS Provision H=720 D=330</li>
+			<li id="bprod23">WC Tall for Rolling Shutter/Hinge H=1280 D=330</li>
+		</ul>
+</div>
+
+
+<div id="bprod0"><div id="boxxy">Vanity/Fasteners</div>
+</div>
+
+<div id="cat7"><div id="boxxy">Draw Bottoms</div>
+		<ul id="mcat7">
+			<li id="bprod24">Draw Back and Bottom for Draw Systems of Make Blum - Tandem Box (M Height)</li>
+			<li id="bprod25">Draw Back and Bottom for Draw Systems of Make Blum - Tandem Box (B Height)</li>
+			<li id="bprod26">Draw Back and Bottom for Draw Systems of Make Blum - Tandem Box (D Height)</li>
+		</ul>
+</div>
+
+</div>
+<form action="{% url 'bill:quant' %}" method="post">
+{% csrf_token %}
+<div id="prod1">
+<table style="width:100%">
+	<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod1 in prod_objs_1 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod1.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod1.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod1.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod1.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod1.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check1" value="{{ prod1.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+<div id="prod2">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod2 in prod_objs_2 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod2.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod2.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod2.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod2.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod2.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check2" value="{{ prod2.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+
+<div id="prod3">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod3 in prod_objs_3 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod3.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod3.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod3.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod3.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod3.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check3" value="{{ prod3.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+
+<div id="prod4">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod4 in prod_objs_4 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod4.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod4.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod4.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod4.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod4.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check4" value="{{ prod4.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod5">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod5 in prod_objs_5 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod5.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod5.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod5.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod5.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod5.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check5" value="{{ prod5.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+
+<div id="prod6">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod6 in prod_objs_6 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod6.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod6.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod6.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod6.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod6.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check6" value="{{ prod6.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+
+<div id="prod7">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod7 in prod_objs_7 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod7.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod7.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod7.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod7.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod7.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check7" value="{{ prod7.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod8">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod8 in prod_objs_8 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod8.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod8.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod8.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod8.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod8.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check8" value="{{ prod8.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+
+<div id="prod9">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod9 in prod_objs_9 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod9.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod9.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod9.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod9.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod9.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check9" value="{{ prod9.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod10">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod10 in prod_objs_10 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod10.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod10.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod10.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod10.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod10.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check10" value="{{ prod10.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod11">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod11 in prod_objs_11 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod11.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod11.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod11.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod11.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod11.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check11" value="{{ prod11.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod12">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod12 in prod_objs_12 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod12.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod12.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod12.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod12.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod12.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check12" value="{{ prod12.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod13">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod13 in prod_objs_13 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod13.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod13.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod13.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod13.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod13.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check13" value="{{ prod13.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod14">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod14 in prod_objs_14 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod14.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod14.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod14.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod14.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod14.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check14" value="{{ prod14.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod15">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod15 in prod_objs_15 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod15.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod15.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod15.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod15.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod15.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check15" value="{{ prod15.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+
+<div id="prod16">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod16 in prod_objs_16 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod16.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod16.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod16.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod16.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod16.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check16" value="{{ prod16.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod17">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod17 in prod_objs_17 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod17.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod17.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod17.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod17.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod17.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check17" value="{{ prod17.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod18">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod18 in prod_objs_18 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod18.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod18.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod18.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod18.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod18.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check18" value="{{ prod18.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod19">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod19 in prod_objs_19 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod19.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod19.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod19.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod19.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod19.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check19" value="{{ prod19.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod20">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod20 in prod_objs_20 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod20.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod20.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod20.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod20.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod20.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check20" value="{{ prod20.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod21">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod21 in prod_objs_21 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod21.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod21.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod21.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod21.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod21.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check21" value="{{ prod21.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod22">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod22 in prod_objs_22 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod22.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod22.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod22.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod22.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod22.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check22" value="{{ prod22.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod23">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod23 in prod_objs_23 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod23.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod23.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod23.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod23.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod23.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check23" value="{{ prod23.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod24">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod24 in prod_objs_24 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod24.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod24.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod24.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod24.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod24.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check24" value="{{ prod24.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod25">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod25 in prod_objs_25 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod25.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod25.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod25.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod25.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod25.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check25" value="{{ prod25.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+
+<div id="prod26">
+<table style="width:100%" >
+<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod26 in prod_objs_26 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod26.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod26.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod26.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod26.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod26.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check26" value="{{ prod26.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+<div id="prod0">
+<table style="width:100%">
+	<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Stock</th>
+	    <th>CheckBox</th>
+	</tr>
+	{% for prod0 in prod_objs_0 %}
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod0.prod_width }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod0.prod_artno }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod0.prod_desc }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod0.prod_rps }}</td>
+		<td>&nbsp;&nbsp;&nbsp;{{ prod0.prod_stock }}</td>
+		<td>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="check[]" id="check1" value="{{ prod0.id }}"/></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+<input type="radio" name="t_type" value="1" checked>BCP</br>
+<input type="radio" name="t_type" value="2">Customer</br>
+<input type="radio" name="t_type" value="3">Customer with discount</br>
+<p><b>Select type of invoice:</b></p>
+<input type="radio" name="b_type" value="1" checked>Pro-forma invoice</br>
+<input type="radio" name="b_type" value="2">Invoice</br></br>
+<button type="submit" name="psub"><p style="color:black">next</p></button>
+</form>
+</body>
+</html>

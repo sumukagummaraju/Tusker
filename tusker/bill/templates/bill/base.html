@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Tusker Cabinets</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	{% load static %}
+	<script type="text/javascript" src="{% static 'bill/main.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'bill/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bill/print.css' %}" media="print" />
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet">
+</head>
+<body>
+ 	{% block body %}
+ 	{% endblock %}
+ </body>
+ </html>

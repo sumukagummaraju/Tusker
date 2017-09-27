@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>PIPL/PI/{{billnum}}-{{ sel_prod_objs_p.number }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	{% load static %}
+	<script type="text/javascript" src="{% static 'bill/main.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'bill/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bill/print.css' %}" media="print" />
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet">
+</head>
+<body>
+<div>
+<img src="static/bill/tusk.png" width="300" height="70" style="float:right;display:inline;">
+<div class="headings">
+<p><b>Prasara Innotech Pvt.Ltd</b></p>
+<p>#3, 4th main, 24th Cross, Karisandra, BSK II Stage</p>
+<p><b>BENGALURU PIN:560 070</b>&nbsp; PH: +91 80 2671 4007</p>
+</div>
+<table style="width:100%" border="boder">
+	<tr rowspan=3>
+		<td colspan=6>To,<br><textarea name="Text1" cols="40" rows="5"></textarea></td>
+		<td colspan=2 align="right">Pro-forma invoice:<br>Date:</td>
+		<td colspan=2>PIPL/PI/{{billnum}}<br><input type="text" size="11"></td>
+	<tr>
+	    <th>Width in mm</th>
+	    <th>Article No.</th> 
+	    <th colspan=5>Details</th>
+	    <th>Selling Price in Rs.</th>
+	    <th>Quantity</th>
+	    <th>Total</th>
+	</tr>
+	{% for sel_prod_obj_px,qua,tot in combo %}
+	<tr>
+		<td align="center">&nbsp;&nbsp;&nbsp;{{ sel_prod_obj_px.prod_width }}</td>
+		<td align="center">&nbsp;&nbsp;&nbsp;{{ sel_prod_obj_px.prod_artno }}</td>
+		<td colspan=5 align="center">&nbsp;&nbsp;&nbsp;{{ sel_prod_obj_px.prod_desc }}</td>
+		<td align="center">&nbsp;&nbsp;&nbsp;{{ sel_prod_obj_px.prod_rps }}</td>
+		<td align="center">&nbsp;&nbsp;&nbsp;{{ qua }}</td>
+		<th align="center">&nbsp;&nbsp;&nbsp;{{ tot }}</td>
+	</tr>
+	{% endfor %}
+{% if sel_prod_objs_p.has_next %}	
+</table>
+{% endif %}
+{% if not sel_prod_objs_p.has_next %}
+<tr>
+	<td colspan=9 align="right">
+		<label for="sub_total">Sub Total</label>
+	</td>
+	<td align="center">
+		<input name="sub_total" id="sub_total" readonly="readonly" value="{{ sub_total }}">
+	</td>
+</tr>
+{% ifequal t_type_val "1" %}
+<tr>
+	<td colspan=9 align="right">
+		<label for="bcp">BCP discount</label>
+	</td>
+	<td align="center">
+		<input name="bcp" id="bcp" readonly="readonly" value="{{ bcp }}">
+	</td>
+</tr>
+{% endifequal %}
+{% ifequal t_type_val "3" %}
+<tr>
+<td colspan=9 align="right">
+<label for="cp">Discount</label>
+</td>
+<td align="center">
+<input name="cp" id="cp" readonly="readonly" value="{{ cp }}">
+</td>
+{% endifequal %}
+</tr>
+<tr>
+<td colspan=9 align="right">
+<label for="total">Total</label>
+</td>
+<td align="center">
+<input name="total" id="total" readonly="readonly" value="{{ just_total }}">
+</td>
+</tr>
+<tr>
+<td colspan=9 align="right">
+<label for="cgst">CGST at 9%</label>
+</td>
+<td align="center">
+<input name="cgst" id="cgst" readonly="readonly" value="{{ cgst }}">
+</td>
+</tr>
+<tr>
+<td colspan=9 align="right">
+<label for="sgst">SGST at 9%</label>
+</td>
+<td align="center">
+<input name="sgst" id="sgst" readonly="readonly" value="{{ sgst }}">
+</td>
+</tr>
+<tr>
+<td colspan=9 align="right">
+<label for="gtotal">Grand Total</label>
+</td>
+<td align="center">
+<input name="gtotal" id="gtotal" readonly="readonly" value="{{ grand_total }}">
+</td>
+</tr>
+<tr>
+	<td colspan=7 align="left">
+		In words
+	</td>
+	<td colspan=3 align="center">
+		<input type="text" size="60">
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Please note valid for six months upto <input type="text" size="30">
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Prices are excluding GST of 18%
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Prices are effective till <input type="text" size="30">
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Delivery charges of Rs. 1200/- Extra within Bangalore city limits + GST as Applicable
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Cabinets are without installation charges and connectors/ Rs.300/- per cabinet/ Tall cabinets Rs.600/- + GST as applicable
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Damages if any to be informed when delivered- No replacements
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Parts are not replaced or taken back
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		<u>Spares are not available separately for any cabinet</u>
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Delivery within 3 weeks of confirmed order with full advance payment
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		Banker's details for remittance:
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		<b>
+		Name: Prasara Innotech Pvt.Ltd,
+		</b>
+		<br>
+		<b>
+		Bankers: Kotak Mahindra Bank Ltd,
+		</b>
+		<br>
+		<b>
+		Current Account: 1212099417
+		</b>
+		<br>
+		<b>
+		IFSC Code: KKBK0008074
+		</b>
+		<br>
+		<b>
+		Branch: Jayanagar 7th block KR Road
+		</b>
+		<br>
+		<b>
+		Bangalore- 560 028
+		</b>
+	</td>
+</tr>
+<tr>
+	<td colspan=10 align="left">
+		<u>Fixed Prices</u>
+	</td>
+</tr>
+</table>
+<div style="float:right">
+<p>for <b> Prasara Innotech Pvt Ltd,</b></p><br>
+<p>&nbsp;&nbsp;&nbsp;(Authorised signatory)</p>
+</div>
+{% endif %}
+<span class="current">
+            Page {{ sel_prod_objs_p.number }} of {{ sel_prod_objs_p.paginator.num_pages }}.
+</span>
+<div class="pagination noprint">
+    <span class="step-links">
+        {% if sel_prod_objs_p.has_previous %}
+            <a href="{% url 'bill:printpx' page %}?page={{ sel_prod_objs_p.previous_page_number }}">«previous</a>
+        {% endif %}
+
+        {% if sel_prod_objs_p.has_next %}
+            <a href="{% url 'bill:printpx' page %}?page={{ sel_prod_objs_p.next_page_number }}">next»</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+ </body>
+ </html>
